@@ -192,7 +192,7 @@ h6 {
 
   .navmenu>ul>li {
     white-space: nowrap;
-    padding: 15px 14px;
+    padding: 18px 16px; /* larger click area to match font */
   }
 
   .navmenu>ul>li:last-child {
@@ -202,8 +202,8 @@ h6 {
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-color);
-    font-size: 15px;
-    padding: 0 2px;
+    font-size: 18px; /* increased from 15px */
+    padding: 0 8px;
     font-family: var(--nav-font);
     font-weight: 400;
     display: flex;
@@ -303,6 +303,32 @@ h6 {
     left: -100%;
     visibility: visible;
   }
+
+  /* ensure header layout supports a left logo + centered nav */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* keep logo pinned to the left */
+  .header .logo {
+    margin-right: auto;
+  }
+
+  /* center the nav menu */
+  .navmenu {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    width: auto;
+  }
+
+  /* ensure the list itself centers its items */
+  .navmenu > ul {
+    justify-content: center;
+  }
 }
 
 /* Mobile Navigation */
@@ -340,9 +366,9 @@ h6 {
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-dropdown-color);
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-family: var(--nav-font);
-    font-size: 17px;
+    font-size: 18px; /* increased from 17px */
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -657,23 +683,27 @@ section,
   position: relative;
   padding: 60px 0;
   display: flex;
-  align-items: center;
+  align-items:center;
   justify-content: center;
 }
 
 .hero img {
+  /* position the hero image to the far left with a small gap, keep it vertically centered */
   position: absolute;
-  inset: 0;
+  left: 20px;
+  transform: translateY(-50%);
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: auto;
+  height:100%;
+  max-width: 100%;
+  object-fit: contain;
   z-index: 1;
 }
 
+
 .hero:before {
   content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 30%);
+  background: color-mix(in srgb, var(--background-color), transparent 70%);
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -751,13 +781,44 @@ section,
 .about .progress-bar-wrap {
   background: color-mix(in srgb, var(--default-color), transparent 90%);
   height: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .about .progress-bar {
   width: 1px;
   height: 10px;
   transition: 0.9s;
-  background-color: var(--accent-color);
+  background: linear-gradient(90deg, #0078ff, #00d4ff);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 120, 255, 0.5);
+}
+
+/* Different color gradients for each skill */
+.about .progress:nth-child(1) .progress-bar {
+  background: linear-gradient(90deg, #0078ff, #0056cc);
+  box-shadow: 0 0 8px rgba(0, 120, 255, 0.3);
+}
+
+.about .progress:nth-child(2) .progress-bar {
+  background: linear-gradient(90deg, #5a67d8, #4c51bf);
+  box-shadow: 0 0 8px rgba(90, 103, 216, 0.3);
+}
+
+.about .progress:nth-child(3) .progress-bar {
+  background: linear-gradient(90deg, #d946a6, #c3185b);
+  box-shadow: 0 0 8px rgba(217, 70, 166, 0.3);
+}
+
+.about .progress:nth-child(4) .progress-bar {
+  background: linear-gradient(90deg, #2563eb, #1e40af);
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+}
+
+.about .progress:nth-child(5) .progress-bar {
+  background: linear-gradient(90deg, #059669, #047857);
+  box-shadow: 0 0 8px rgba(5, 150, 105, 0.3);
 }
 
 .about .about-me h4 {
